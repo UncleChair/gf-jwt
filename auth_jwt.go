@@ -12,7 +12,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcache"
-	"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // MapClaims type that uses the map[string]interface{} for JSON decoding
@@ -358,8 +358,6 @@ func (mw *GfJWTMiddleware) LogoutHandler(ctx context.Context) {
 		mw.unauthorized(ctx, http.StatusUnauthorized, mw.HTTPStatusMessageFunc(err, ctx))
 		return
 	}
-
-	return
 }
 
 // RefreshHandler can be used to refresh a token. The token still needs to be valid on refresh.
@@ -422,12 +420,10 @@ func (mw *GfJWTMiddleware) CheckIfTokenExpire(ctx context.Context) (jwt.MapClaim
 	token, err := mw.parseToken(r)
 	if err != nil {
 		// If we receive an error, and the error is anything other than a single
-		// ValidationErrorExpired, we want to return the error.
-		// If the error is just ValidationErrorExpired, we want to continue, as we can still
+		// ErrTokenExpired, we want to return the error.
+		// If the error is just ErrTokenExpired, we want to continue, as we can still
 		// refresh the token if it's within the MaxRefresh time.
-		// (see https://github.com/appleboy/gin-jwt/issues/176)
-		validationErr, ok := err.(*jwt.ValidationError)
-		if !ok || validationErr.Errors != jwt.ValidationErrorExpired {
+		if err != jwt.ErrTokenExpired {
 			return nil, "", err
 		}
 	}
@@ -689,23 +685,6 @@ func (mw *GfJWTMiddleware) parseToken(r *ghttp.Request) (*jwt.Token, error) {
 
 		// save token string if valid
 		r.SetParam(TokenKey, token)
-
-		return mw.Key, nil
-	})
-}
-
-func (mw *GfJWTMiddleware) parseTokenString(token string) (*jwt.Token, error) {
-	if mw.KeyFunc != nil {
-		return jwt.Parse(token, mw.KeyFunc)
-	}
-
-	return jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
-		if jwt.GetSigningMethod(mw.SigningAlgorithm) != t.Method {
-			return nil, ErrInvalidSigningAlgorithm
-		}
-		if mw.usingPublicKeyAlgo() {
-			return mw.pubKey, nil
-		}
 
 		return mw.Key, nil
 	})
