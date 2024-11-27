@@ -1,10 +1,6 @@
-# THIS REPOSITORY IS NO LONGER MAINTANED
+# gf-jwt v3
 
-The new repository can be found at: https://github.com/golang-jwt/jwt
-
-# gf-jwt v2
-
-This is a middleware for Gf framework.
+This is a jwt middleware for GoFrame.
 
 It uses jwt-go to provide a jwt authentication middleware. It provides additional handler functions to provide the login api that will generate the token and an additional refresh handler that can be used to refresh tokens.
 
@@ -13,13 +9,13 @@ It uses jwt-go to provide a jwt authentication middleware. It provides additiona
 Download and install
 
 ```sh
-$ go get github.com/gogf/gf-jwt/v2
+$ go get github.com/UncleChair/gf-jwt/v3
 ```
 
 Import
 
 ```go
-import "github.com/gogf/gf-jwt/v2"
+import "github.com/UncleChair/gf-jwt/v3"
 ```
 
 

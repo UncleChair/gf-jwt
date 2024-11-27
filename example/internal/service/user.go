@@ -2,7 +2,8 @@ package service
 
 import (
 	"context"
-	"github.com/gogf/gf-jwt/v2/example/internal/model"
+
+	"github.com/UncleChair/gf-jwt/v3/example/internal/model"
 	"github.com/gogf/gf/v2/frame/g"
 )
 

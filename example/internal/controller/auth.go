@@ -2,8 +2,9 @@ package controller
 
 import (
 	"context"
-	"github.com/gogf/gf-jwt/v2/example/api"
-	"github.com/gogf/gf-jwt/v2/example/internal/service"
+
+	"github.com/UncleChair/gf-jwt/v3/example/api"
+	"github.com/UncleChair/gf-jwt/v3/example/internal/service"
 )
 
 type authController struct{}

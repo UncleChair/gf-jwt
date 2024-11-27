@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"context"
-	"github.com/gogf/gf-jwt/v2/example/internal/controller"
-	"github.com/gogf/gf-jwt/v2/example/internal/service"
+
+	"github.com/UncleChair/gf-jwt/v3/example/internal/controller"
+	"github.com/UncleChair/gf-jwt/v3/example/internal/service"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"

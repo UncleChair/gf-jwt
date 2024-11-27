@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gogf/gf-jwt/v2/example/internal/cmd"
+	"github.com/UncleChair/gf-jwt/v3/example/internal/cmd"
 	"github.com/gogf/gf/v2/os/gctx"
 )
 
